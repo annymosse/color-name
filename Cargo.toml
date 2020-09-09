@@ -1,9 +1,36 @@
 [package]
 name = "color-name"
-version = "0.1.0"
-authors = ["annymosse <annymosse@gmail.com>"]
+version = "1.0.0"
+authors = ["Ben Hamida Abdelkarim <annymosse@gmail.com>"]
 edition = "2018"
+homepage = "https://github.com/annymosse/color-name"
+repository = "https://github.com/annymosse/color-name"
+autobenches = true
+description = """
+A crate with color names and its values and usefull functions inluded to get similar colour name by RGB data;
+Based on css-color names.
+"""
 
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+license = "MIT OR Apache-2.0"
+license-file = "LICENSE.txt"
+keywords = [
+    "color",
+    "colors",
+    "color-name-similar",
+    "closest-color-name",
+    "color-names",
+]
+categories = [
+    "command-line-utilities",
+    "command-line-interface",
+    "graphics",
+    "text-editors",
+]
+exclude = [
+    "tmp/",
+]
+
+[badges]
+travis-ci = { repository = "annymosse/color-name" }
 
 [dependencies]
