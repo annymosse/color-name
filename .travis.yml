@@ -9,4 +9,4 @@ matrix:
   allow_failures:
     - rust: nightly
 
-script: "travis.sh"
+script: "./travis.sh"
