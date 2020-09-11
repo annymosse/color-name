@@ -12,7 +12,6 @@ Based on css-color names.
 """
 
 license = "MIT OR Apache-2.0"
-license-file = "LICENSE.txt"
 keywords = [
     "color",
     "colors",
