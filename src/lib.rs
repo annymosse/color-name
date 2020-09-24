@@ -166,17 +166,90 @@ fn comparative_distance(x: [u8; 3], y: [u8; 3]) -> u128 {
 pub struct Color;
 
 impl Color {
-    /**
-     * Get colour rgb array by enum Colors param.
-     */
+    /// Get colour rgb array by enum Colors param.
+    ///
+    /// #### Example:
+    ///
+    /// ```rust
+    /// use color_name::{
+    ///     // main function to trait colours
+    ///     Color,
+    ///     // enum colour names use it with Color::value(color:color)
+    ///     // Ex: Color::value(color::red);
+    ///     color
+    /// };
+    /// assert_eq!(Color::value(color::white), [255, 255, 255]);
+    /// ```
+    #[deprecated(
+        since = "1.1.0",
+        note = "Please use val().by_enum() function instead, this function will no longer exist above version 1.1.0 ."
+    )]
     pub fn value(color: color) -> [u8; 3] {
+        Self.by_enum(color)
+    }
+
+    /// Get colour rgb array by enum color param.
+    ///
+    /// #### Example
+    ///
+    /// ```rust
+    /// use color_name::{
+    ///     Color,
+    ///     color
+    /// };
+    /// assert_eq!(Color::val().by_enum(color::white), [255, 255, 255]);
+    ///
+    /// ```
+    pub fn by_enum(&self, color: color) -> [u8; 3] {
         let _clr = color as usize;
         (colors_array::COLORS_DATA)[_clr].1
     }
 
-    /**
-     * Get exact colour name if there's no data it return "None".
-     */
+    /// Get colour rgb array by String param.
+    ///
+    /// #### Example:
+    ///
+    /// ```rust
+    /// use color_name::{
+    ///     Color
+    /// };
+    /// assert_eq!(Color::val().by_string("InDigo".to_string()).expect("Not found"), [75, 0, 130]);
+    ///
+    /// // NOTE: the string can be at any case it will convert it into Title-case
+    /// assert_eq!(Color::val().by_string("inDigo".to_string()).expect("Not found"), [75, 0, 130]);
+    /// assert_eq!(Color::val().by_string("IndiGo ".to_string()).expect("Not found"), [75, 0, 130]);
+    /// ```
+    ///
+    /// **NOTE:** Return `Result<[u8;3],u16>` as color data `[u8;3]` or Not found (`404`).
+    pub fn by_string(&self, color: String) -> Result<[u8; 3], u16> {
+        let mut got = false;
+        let mut col = [0, 0, 0];
+        for c in colors_array::COLORS_DATA.iter() {
+            if String::from(c.0)
+                == format!(
+                    "{}{}",
+                    &color.trim().to_uppercase()[0..1],
+                    &color.trim().to_lowercase()[1..]
+                )
+            {
+                col = (c.1).to_owned();
+                got = true;
+                break;
+            }
+        }
+        if got {
+            Ok(col)
+        } else {
+            Err(404)
+        }
+    }
+
+    /// Get value of a color by string OR enum.
+    pub fn val() -> Color {
+        Color
+    }
+
+    /// Get exact colour name if there's no data it return "404".
     pub fn name(rgb: [u8; 3]) -> String {
         for (name, value) in colors_array::COLORS_DATA.iter() {
             if value == &rgb {
@@ -184,15 +257,13 @@ impl Color {
             }
         }
 
-        format!("None")
+        format!("404")
     }
 
-    /**
-     * Get closest colour name match the provided rgb data array.
-     */
+    /// Get closest colour name match the provided rgb data array.
     pub fn similar(rgb: [u8; 3]) -> String {
         let c = Self::name(rgb);
-        if c == "None" {
+        if c == "404" {
             let mut current_closest_distance = u128::MAX;
             let mut current_closest_keyword = "";
 
@@ -216,9 +287,7 @@ impl Color {
         }
     }
 
-    /**
-     * Sweet proxy to simlar(rgb)
-     */
+    /// Sweet proxy to simlar(rgb)
     pub fn close_to(rgb: [u8; 3]) -> String {
         Self::similar(rgb)
     }
@@ -241,30 +310,57 @@ mod test {
     }
 
     #[test]
-    fn test_color_value_fn() {
-        assert_eq!(Color::value(color::yellow), [255, 255, 0]);
-        assert_eq!(Color::value(color::aqua), [0, 255, 255]);
-        assert_eq!(Color::value(color::red), [255, 0, 0]);
-        assert_eq!(Color::value(color::black), [0, 0, 0]);
+    fn test_color__by_enum_fn() {
+        assert_eq!(Color::val().by_enum(color::yellow), [255, 255, 0]);
+        assert_eq!(Color::val().by_enum(color::aqua), [0, 255, 255]);
+        assert_eq!(Color::val().by_enum(color::red), [255, 0, 0]);
+        assert_eq!(Color::val().by_enum(color::black), [0, 0, 0]);
+    }
+
+    #[test]
+    fn test_color__by_string_fn() {
+        assert_eq!(
+            Color::val()
+                .by_string(String::from("Azure"))
+                .expect("Not Found"),
+            [240, 255, 255]
+        );
+        assert_eq!(
+            Color::val()
+                .by_string(String::from("Chocolate"))
+                .expect("Not Found"),
+            [210, 105, 30]
+        );
+        assert_eq!(
+            Color::val()
+                .by_string(String::from("Red"))
+                .expect("Not Found"),
+            [255, 0, 0]
+        );
+        assert_eq!(
+            Color::val()
+                .by_string(String::from("Black"))
+                .expect("Not Found"),
+            [0, 0, 0]
+        );
+        assert_eq!(Color::val().by_string(String::from("annymosse")), Err(404));
     }
 
     #[test]
     fn test_color_name_fn() {
         assert_eq!(Color::name([0, 0, 0]), "Black");
-        assert_eq!(Color::name([0, 1, 1]), "None");
-        assert_eq!(Color::name([0, 195, 0]), "None");
+        assert_eq!(Color::name([0, 1, 1]), "404");
+        assert_eq!(Color::name([0, 195, 0]), "404");
     }
 
     #[test]
     fn test_compare() {
-        // 213 69 87 33 26
         assert_eq!(comparative_distance([195, 40, 10], [0, 0, 0]), 39725);
         assert_eq!(comparative_distance([10, 40, 255], [195, 40, 10]), 94250);
     }
 
     #[test]
     fn test_color_similar_fn() {
-        // 213 69 87 33 26
         assert_eq!(Color::similar([195, 40, 10]), "Firebrick");
         assert_eq!(Color::similar([123, 45, 67]), "Brown");
         assert_eq!(Color::similar([213, 69, 87]), "Indianred");
@@ -274,7 +370,6 @@ mod test {
 
     #[test]
     fn test_color_close_to() {
-        // 213 69 87 33 26
         assert_eq!(Color::close_to([195, 40, 10]), "Firebrick");
         assert_eq!(Color::close_to([123, 45, 67]), "Brown");
         assert_eq!(Color::close_to([213, 69, 87]), "Indianred");
@@ -284,9 +379,9 @@ mod test {
 
     #[test]
     fn test_enum_colors() {
-        assert_eq!(Color::value(color::yellow), [255, 255, 0]);
-        assert_eq!(Color::value(color::aqua), [0, 255, 255]);
-        assert_eq!(Color::value(color::red), [255, 0, 0]);
-        assert_eq!(Color::value(color::black), [0, 0, 0]);
+        assert_eq!(Color::val().by_enum(color::yellow), [255, 255, 0]);
+        assert_eq!(Color::val().by_enum(color::aqua), [0, 255, 255]);
+        assert_eq!(Color::val().by_enum(color::red), [255, 0, 0]);
+        assert_eq!(Color::val().by_enum(color::black), [0, 0, 0]);
     }
 }
