@@ -1,4 +1,4 @@
-[![Build Status](annymosse/color-name.svg)](annymosse/color-name.svg?branch=master)
+[![Build Status](https://travis-ci.org/annymosse/color-name.svg?branch=master)](https://travis-ci.org/annymosse/color-name)
 [![API](https://docs.rs/color-name/badge.svg)](https://docs.rs/color-name)
 
 A crate with color names and its values and usefull functions inluded to get similar colour name by RGB data. Based on these [named-colors](http://dev.w3.org/csswg/css-color/#named-colors); Inspired heavely by https://github.com/colorjs/color-name.
