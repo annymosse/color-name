@@ -29,17 +29,25 @@ use color_name::{
 };
 
 assert_eq!(Color::name([0, 0, 0]), "Black");
-// In case there's no color match that rgb param color it return "None"
-assert_eq!(Color::name([0, 1, 1]), "None");
-assert_eq!(Color::name([95, 4, 1]), "None");
+// In case there's no color match that rgb param color it return "404"
+assert_eq!(Color::name([0, 1, 1]), "404");
+assert_eq!(Color::name([95, 4, 1]), "404");
 // to get the closest similar colour use similar() or close_to()
 //NOTE: close_to() is a proxy to similar()
 assert_eq!(Color::similar([0, 1, 1]), "Black");
 assert_eq!(Color::similar([95, 4, 1]), "Maroon");
 assert_eq!(Color::close_to([95, 4, 1]), "Maroon");
 
+// Deprecated use val().by_enum()
 assert_eq!(Color::value(color::white), [255, 255, 255]);
+assert_eq!(Color::val().by_enum(color::white), [255, 255, 255]);
 assert_eq!(Color::value(color::indigo), [75, 0, 130]);
+assert_eq!(Color::val().by_enum(color::indigo), [75, 0, 130]);
+
+assert_eq!(Color::val().by_string("InDigo".to_string()), [75, 0, 130]);
+// NOTE: the string can be at any case it will convert it into Title-case
+assert_eq!(Color::val().by_string("inDigo".to_string()), [75, 0, 130]);
+assert_eq!(Color::val().by_string("IndiGo".to_string()), [75, 0, 130]);
 
 
 // for lower-case colors
