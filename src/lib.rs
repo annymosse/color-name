@@ -319,6 +319,8 @@ mod test {
 
     #[test]
     fn test_color__by_string_fn() {
+        assert_eq!(Color::val().by_string(String::from("")), Err(404));
+        assert_eq!(Color::val().by_string(String::from("A")), Err(404));
         assert_eq!(
             Color::val()
                 .by_string(String::from("Azure"))
