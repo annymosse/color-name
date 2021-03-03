@@ -222,25 +222,30 @@ impl Color {
     ///
     /// **NOTE:** Return `Result<[u8;3],u16>` as color data `[u8;3]` or Not found (`404`).
     pub fn by_string(&self, color: String) -> Result<[u8; 3], u16> {
-        let mut got = false;
-        let mut col = [0, 0, 0];
-        for c in colors_array::COLORS_DATA.iter() {
-            if String::from(c.0)
-                == format!(
-                    "{}{}",
-                    &color.trim().to_uppercase()[0..1],
-                    &color.trim().to_lowercase()[1..]
-                )
-            {
-                col = (c.1).to_owned();
-                got = true;
-                break;
-            }
-        }
-        if got {
-            Ok(col)
-        } else {
+        // if there ends up being a color whose name is the empty string, this will need changing
+        if color.len() == 0 {
             Err(404)
+        } else {
+            let mut got = false;
+            let mut col = [0, 0, 0];
+            for c in colors_array::COLORS_DATA.iter() {
+                if String::from(c.0)
+                    == format!(
+                        "{}{}",
+                        &color.trim().to_uppercase()[0..1],
+                        &color.trim().to_lowercase()[1..]
+                    )
+                {
+                    col = (c.1).to_owned();
+                    got = true;
+                    break;
+                }
+            }
+            if got {
+                Ok(col)
+            } else {
+                Err(404)
+            }
         }
     }
 
