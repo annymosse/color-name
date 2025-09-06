@@ -9,7 +9,7 @@ Add this to your `Cargo.toml`:
 
 ```toml
 [dependencies]
-color-name = "1.0.0"
+color-name = "1.1.1"
 ```
 
 Add this to your `main.rs` or any other rust file:
@@ -73,13 +73,11 @@ assert_eq!(Colors::Yellow,[255,255,0]);
 ## Todo
 
 - [ ] Add script to auto generate the following files from csv file:
-  - [ ] `Colors.rs`.
-  - [ ] `colors.rs`.
-  - [ ] `colors.rs`.
+  - [ ] `colors_constants.rs`.
   - [ ] `colors_array.rs`.
 - [ ] Improve the whole crate to be able to eliminate these above files.
 - [ ] Improve the whole crate to be more dynamic and able to extend it with other crates.
 
 ## Licence
 
-[MIT License](./LICENSE.txt)
+[MIT Or Apache 2 Licenses](./LICENSE.txt)
