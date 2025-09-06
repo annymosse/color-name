@@ -1,7 +1,8 @@
 #![allow(dead_code, non_camel_case_types, non_snake_case)]
-pub mod Colors;
-pub mod colors;
+mod colors_constants;
 mod colors_array;
+
+pub use colors_constants::{colors, Colors};
 
 pub enum color {
     antiquewhite = 0,
