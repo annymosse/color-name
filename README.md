@@ -5,15 +5,6 @@ A crate with color names and its values and usefull functions inluded to get sim
 
 ## Usage
 
-Add this to your `Cargo.toml`:
-
-```toml
-[dependencies]
-color-name = "1.2.0"
-```
-
-Add this to your `main.rs` or any other rust file:
-
 ```rust
 extern crate color_name; // 👈 Before Rust 2018 Edition, Not necessary in Rust 2018 and later
 
@@ -81,7 +72,7 @@ Err(404)
 
 ```rust
 use color_name::{
-  //XXXXXXXXXXXXXXXXXXXX DEPRECATION XXXXXXXXXXXXxXXXXXXX
+  //XXXXXXXXXXXXXXXXXXXX DEPRECATION XXXXXXXXXXXXXXXXXXXX
   // The following comment block will be removed in the
   // upcommin versions of the crate; Thus,  It's hightly
   // recommanded to migrate your code to the new API

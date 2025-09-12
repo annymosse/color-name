@@ -1,6 +1,54 @@
 {
   "lockfile_version": "1",
   "packages": {
+    "git-town@latest": {
+      "last_modified": "2025-07-28T17:09:23Z",
+      "resolved": "github:NixOS/nixpkgs/648f70160c03151bc2121d179291337ad6bc564b#git-town",
+      "source": "devbox-search",
+      "version": "21.3.0",
+      "systems": {
+        "aarch64-darwin": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/0q1v57cc3kjyxg0wpjmk09diyyx9a9ri-git-town-21.3.0",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/0q1v57cc3kjyxg0wpjmk09diyyx9a9ri-git-town-21.3.0"
+        },
+        "aarch64-linux": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/2g9vbrdhyqxjzqmry59j3anrsra0jgwi-git-town-21.3.0",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/2g9vbrdhyqxjzqmry59j3anrsra0jgwi-git-town-21.3.0"
+        },
+        "x86_64-darwin": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/lf72n10jqqgs7iskasw6qbijyp6c6hxf-git-town-21.3.0",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/lf72n10jqqgs7iskasw6qbijyp6c6hxf-git-town-21.3.0"
+        },
+        "x86_64-linux": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/a20pvjqlpcbhk3py2f3kf6si7xapppx7-git-town-21.3.0",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/a20pvjqlpcbhk3py2f3kf6si7xapppx7-git-town-21.3.0"
+        }
+      }
+    },
     "github:NixOS/nixpkgs/nixpkgs-unstable": {
       "last_modified": "2025-09-05T01:14:44Z",
       "resolved": "github:NixOS/nixpkgs/ca77296380960cd497a765102eeb1356eb80fed0?lastModified=1757034884&narHash=sha256-PgLSZDBEWUHpfTRfFyklmiiLBE1i1aGCtz4eRA3POao%3D"
