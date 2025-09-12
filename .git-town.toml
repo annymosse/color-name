@@ -1,0 +1,25 @@
+# More info around this file at https://www.git-town.com/configuration-file
+
+[branches]
+main = "master"
+perennials = []
+perennial-regex = "^release-.+"
+
+[create]
+new-branch-type = "feature"
+share-new-branches = "no"
+
+[hosting]
+dev-remote = "origin"
+
+[ship]
+delete-tracking-branch = true
+strategy = "api"
+
+[sync]
+feature-strategy = "merge"
+perennial-strategy = "rebase"
+prototype-strategy = "merge"
+push-hook = true
+tags = true
+upstream = true
